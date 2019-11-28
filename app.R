@@ -42,11 +42,15 @@ server <- function(input, output) {
     sect <- reactive({ 
         sect <- USPersonalExpenditure[input$variable,]
     })
+    lab<- reactive({ 
+        lab <- input$variable
+    })
     
     output$Us <- renderText('Experimenting with shiny app using the dataset from R : USPersonalExpenditure')
     output$secPlot <- renderPlot({ 
         sector <- sect()
-        plot(x,sector)
+        mylab <- lab()
+        plot(x,sector, xlab = "Year", ylab = mylab)
         title("Plot of US expenditure by sector")
     })
     
